@@ -3,22 +3,32 @@
  * BDRURAL (MySQL 5.6)
  * =========================================================
  *
- * author BOZA VILLAR, RICARDO
+ * Author: BOZA VILLAR, RICARDO
  *
  * =========================================================
  * esquema.sql
  * =========================================================
  */
 
+-- ---------------------------------------------------------
+-- Usuario y permisos
+-- ---------------------------------------------------------
+DROP USER IF EXISTS 'rural'@'localhost';
+DROP USER IF EXISTS 'rural'@'%';
+FLUSH PRIVILEGES;
+
+CREATE USER 'rural'@'localhost' IDENTIFIED BY 'passrural';
+CREATE USER 'rural'@'%' IDENTIFIED BY 'passrural';
+
+-- ---------------------------------------------------------
+-- Base de datos
+-- ---------------------------------------------------------
 DROP DATABASE IF EXISTS BDRURAL;
 CREATE DATABASE BDRURAL
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 
--- ---------------------------------------------------------
--- Usuario y permisos
--- ---------------------------------------------------------
-CREATE USER 'rural'@'%' IDENTIFIED BY 'passrural';
+GRANT ALL PRIVILEGES ON BDRURAL.* TO 'rural'@'localhost';
 GRANT ALL PRIVILEGES ON BDRURAL.* TO 'rural'@'%';
 FLUSH PRIVILEGES;
 
@@ -69,9 +79,14 @@ CREATE INDEX idx_alojamientos_ubicacion ON alojamientos(ubicacion);
 -- Datos iniciales
 -- ---------------------------------------------------------
 INSERT INTO tipos (codigo, descripcion) VALUES
-(1, 'Casa rural'),
-(2, 'Apartamento'),
-(3, 'Hotel'),
-(4, 'Hostal'),
-(5, 'Albergue'),
-(6, 'Camping');
+  (1, 'Casa rural'),
+  (2, 'Apartamento'),
+  (3, 'Hotel'),
+  (4, 'Hostal'),
+  (5, 'Albergue'),
+  (6, 'Camping');
+
+-- ---------------------------------------------------------
+-- Verificación de usuario
+-- ---------------------------------------------------------
+SELECT user, host FROM mysql.user WHERE user = 'rural';
