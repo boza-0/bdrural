@@ -3,10 +3,7 @@
  * BDRURAL (MySQL 5.6)
  * =========================================================
  *
- * author BERJANO MUÑOZ, RAFAEL
  * author BOZA VILLAR, RICARDO
- * author CALIXTO DEL HOYO, JUAN
- * author GARCÍA MARCHENA, ÁLVARO
  *
  * =========================================================
  * semilla.sql
